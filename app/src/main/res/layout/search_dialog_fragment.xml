@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_sheet_dialog_layout"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/margin_xxxx_large"
+    android:layout_height="205dp"
     android:layout_marginBottom="@dimen/margin_medium"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
@@ -49,4 +49,6 @@
             android:visibility="visible"
             tools:visibility="visible" />
     </FrameLayout>
+
+
 </LinearLayout>

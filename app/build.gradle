@@ -52,6 +52,9 @@ dependencies {
         implementation "com.squareup.retrofit2:adapter-rxjava3:$retrofit"
         implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
+        def lifecycle = "1.1.1"
+        implementation "android.arch.lifecycle:extensions:$lifecycle"
+
 
         //Room
         def room = "2.3.0"
@@ -60,6 +63,17 @@ dependencies {
         implementation "androidx.room:room-rxjava3:$room"
         kapt "androidx.room:room-compiler:$room"
 
+        //Dagger
+        def dagger2 = "2.38.1"
+        implementation "com.google.dagger:dagger-android:$dagger2"
+        implementation "com.google.dagger:dagger-android-support:$dagger2"
+        kapt "com.google.dagger:dagger-android-processor:$dagger2"
+        kapt "com.google.dagger:dagger-compiler:$dagger2"
+
+        // Assisted Injection
+        def dagger_assist_version = '0.5.2'
+        implementation "com.squareup.inject:assisted-inject-annotations-dagger2:$dagger_assist_version"
+        kapt "com.squareup.inject:assisted-inject-processor-dagger2:$dagger_assist_version"
 
         //view binding delegate
         def viewBinding = "1.4.7"
