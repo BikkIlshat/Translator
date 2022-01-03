@@ -16,7 +16,7 @@
         <activity
             android:name="com.hfad.translator.view.main.MainActivity"
             android:exported="true"
-            android:screenOrientation="portrait">
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

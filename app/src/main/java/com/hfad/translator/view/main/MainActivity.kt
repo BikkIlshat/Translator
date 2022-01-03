@@ -19,7 +19,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     @Inject
     internal lateinit var viewModelFactory: ViewModelProvider.Factory
-    override lateinit var model: MainViewModel
+
     private lateinit var binding: ActivityMainBinding
 
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
@@ -36,6 +36,13 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
+
+    override val model: MainViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(
+            MainViewModel::class.java
+        )
+    }
+
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
         object : SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
@@ -54,8 +61,10 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        if(savedInstanceState == null) model
 
-        model = viewModelFactory.create(MainViewModel::class.java)
+
+
         model.subscribe().observe(this@MainActivity, { renderData(it) })
 
         with(binding) {
