@@ -14,8 +14,8 @@ import javax.inject.Named
  * Снабжаем интерактор репозиторием для получения локальных или внешних данных
  */
 class MainInteractor(
-    @Named(NAME_REMOTE) val repositoryRemote: Repository<List<DataModel>>,
-    @Named(NAME_LOCAL) val repositoryLocal: Repository<List<DataModel>>
+    private val repositoryRemote: Repository<List<DataModel>>,
+    private val repositoryLocal: Repository<List<DataModel>>
 ) : Interactor<AppState> {
 
     override fun getData(word: String, fromRemoteSource: Boolean): Observable<AppState> {

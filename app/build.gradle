@@ -80,6 +80,16 @@ dependencies {
         implementation "com.github.kirich1409:viewbindingpropertydelegate:$viewBinding"
 
 
+        //Koin for Android
+        //Current version
+        def koin_version= "3.1.2"
+        //Koin core features
+        implementation "io.insert-koin:koin-core:$koin_version"
+        //Koin main features for Android (Scope,ViewModel ...)
+        implementation "io.insert-koin:koin-android:$koin_version"
+        //Koin Java Compatibility
+        implementation "io.insert-koin:koin-android-compat:$koin_version"
+
 
         implementation 'androidx.core:core-ktx:1.7.0'
         implementation 'androidx.appcompat:appcompat:1.4.0'

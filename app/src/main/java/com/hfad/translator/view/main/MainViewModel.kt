@@ -6,9 +6,8 @@ import com.hfad.translator.utils.parseSearchResults
 import com.hfad.translator.viewmodel.BaseViewModel
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.observers.DisposableObserver
-import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val interactor: MainInteractor) :
+class MainViewModel(private val interactor: MainInteractor) :
     BaseViewModel<AppState>() {
 
     private var appState: AppState? = null
