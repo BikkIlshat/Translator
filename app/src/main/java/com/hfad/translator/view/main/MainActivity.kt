@@ -17,9 +17,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     private lateinit var binding: ActivityMainBinding
     override lateinit var model: MainViewModel
-
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
-
     private val fabClickListener: View.OnClickListener =
         View.OnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -32,7 +30,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
-
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
         object : SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
@@ -79,7 +76,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                         progressBarRound.visibility = View.VISIBLE
                     }
                 }
-
             }
             is AppState.Error -> {
                 showViewWorking()

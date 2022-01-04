@@ -2,7 +2,6 @@ package com.hfad.translator.model.repository
 
 import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.model.datasource.DataSource
-import io.reactivex.rxjava3.core.Observable
 
 
 /**
@@ -11,7 +10,7 @@ import io.reactivex.rxjava3.core.Observable
 class RepositoryImpl(private val dataSource: DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
-    override fun getData(word: String): Observable<List<DataModel>> {
+    override suspend fun getData(word: String): List<DataModel> {
         return dataSource.getData(word)
     }
 }
