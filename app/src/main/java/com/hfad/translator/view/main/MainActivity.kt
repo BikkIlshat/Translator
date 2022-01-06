@@ -1,9 +1,10 @@
 package com.hfad.translator.view.main
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainBinding
@@ -12,18 +13,13 @@ import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.utils.netwok.isOnline
 import com.hfad.translator.view.base.BaseActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
-import dagger.android.AndroidInjection
-import javax.inject.Inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
-    @Inject
-    internal lateinit var viewModelFactory: ViewModelProvider.Factory
-
     private lateinit var binding: ActivityMainBinding
-
+    override val model: MainViewModel by viewModel()
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
-
     private val fabClickListener: View.OnClickListener =
         View.OnClickListener {
             val searchDialogFragment = SearchDialogFragment.newInstance()
@@ -36,13 +32,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
             }
         }
-
-    override val model: MainViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(
-            MainViewModel::class.java
-        )
-    }
-
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
         object : SearchDialogFragment.OnSearchClickListener {
             override fun onClick(searchWord: String) {
@@ -56,22 +45,11 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        AndroidInjection.inject(this)
-
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        if(savedInstanceState == null) model
-
-
-
-        model.subscribe().observe(this@MainActivity, { renderData(it) })
-
-        with(binding) {
-            searchFab.setOnClickListener(fabClickListener)
-            mainActivityRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
-            mainActivityRecyclerview.adapter = adapter
-        }
+        initViewModel()
+        initViews()
     }
 
     override fun renderData(appState: AppState) {
@@ -92,15 +70,14 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 showViewLoading()
                 with(binding) {
                     if (appState.progress != null) {
-                        progressBarHorizontal.visibility = View.VISIBLE
-                        progressBarRound.visibility = View.GONE
-                       progressBarHorizontal.progress = appState.progress
+                        progressBarHorizontal.visibility = VISIBLE
+                        progressBarRound.visibility = GONE
+                        progressBarHorizontal.progress = appState.progress
                     } else {
-                       progressBarHorizontal.visibility = View.GONE
-                        progressBarRound.visibility = View.VISIBLE
+                        progressBarHorizontal.visibility = GONE
+                        progressBarRound.visibility = VISIBLE
                     }
                 }
-
             }
             is AppState.Error -> {
                 showViewWorking()
@@ -109,12 +86,25 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         }
     }
 
+    private fun initViewModel() {
+        if (binding.mainActivityRecyclerview.adapter != null) {
+            throw IllegalStateException("The ViewModel should be initialised first")
+        }
+        model.subscribe().observe(this@MainActivity, { renderData(it) })
+    }
+
+    private fun initViews() = with(binding) {
+        searchFab.setOnClickListener(fabClickListener)
+        mainActivityRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
+        mainActivityRecyclerview.adapter = adapter
+    }
+
     private fun showViewWorking() {
-        binding.loadingFrameLayout.visibility = View.GONE
+        binding.loadingFrameLayout.visibility = GONE
     }
 
     private fun showViewLoading() {
-        binding.loadingFrameLayout.visibility = View.VISIBLE
+        binding.loadingFrameLayout.visibility = VISIBLE
     }
 
     companion object {

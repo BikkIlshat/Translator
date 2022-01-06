@@ -3,20 +3,31 @@ package com.hfad.translator.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.hfad.translator.model.data.AppState
-import com.hfad.translator.scheduler.SchedulerProvider
-import io.reactivex.rxjava3.disposables.CompositeDisposable
+import kotlinx.coroutines.*
 
 abstract class BaseViewModel<T : AppState>(
-    protected open val liveDataForViewToObserve: MutableLiveData<T> = MutableLiveData(),
-    protected open val compositeDisposable: CompositeDisposable = CompositeDisposable(),
-    protected open val schedulerProvider: SchedulerProvider = SchedulerProvider()
+    protected open val _mutableLiveData: MutableLiveData<T> = MutableLiveData()
 ) : ViewModel() {
+
+    protected val viewModelCoroutineScope = CoroutineScope(
+        Dispatchers.IO
+                + SupervisorJob()
+                + CoroutineExceptionHandler { _, throwable ->
+            handleError(throwable)
+        })
+
+    override fun onCleared() {
+        super.onCleared()
+        cancelJob()
+    }
+
+    protected fun cancelJob() {
+        viewModelCoroutineScope.coroutineContext.cancelChildren()
+    }
 
     abstract fun getData(word: String, isOnline: Boolean)
 
-    override fun onCleared() {
-        compositeDisposable.clear()
-    }
+    abstract fun handleError(error: Throwable)
 }
 
 
