@@ -1,6 +1,8 @@
 package com.hfad.translator.view.main
 
 import android.os.Bundle
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     private lateinit var binding: ActivityMainBinding
-    override lateinit var model: MainViewModel
+    override val model: MainViewModel by viewModel()
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
     private val fabClickListener: View.OnClickListener =
         View.OnClickListener {
@@ -68,12 +70,12 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 showViewLoading()
                 with(binding) {
                     if (appState.progress != null) {
-                        progressBarHorizontal.visibility = View.VISIBLE
-                        progressBarRound.visibility = View.GONE
+                        progressBarHorizontal.visibility = VISIBLE
+                        progressBarRound.visibility = GONE
                         progressBarHorizontal.progress = appState.progress
                     } else {
-                        progressBarHorizontal.visibility = View.GONE
-                        progressBarRound.visibility = View.VISIBLE
+                        progressBarHorizontal.visibility = GONE
+                        progressBarRound.visibility = VISIBLE
                     }
                 }
             }
@@ -88,8 +90,6 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         if (binding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        val viewModel: MainViewModel by viewModel()
-        model = viewModel
         model.subscribe().observe(this@MainActivity, { renderData(it) })
     }
 
@@ -100,11 +100,11 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     }
 
     private fun showViewWorking() {
-        binding.loadingFrameLayout.visibility = View.GONE
+        binding.loadingFrameLayout.visibility = GONE
     }
 
     private fun showViewLoading() {
-        binding.loadingFrameLayout.visibility = View.VISIBLE
+        binding.loadingFrameLayout.visibility = VISIBLE
     }
 
     companion object {
