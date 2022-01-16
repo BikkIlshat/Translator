@@ -10,8 +10,10 @@ import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainBinding
 import com.hfad.translator.model.data.AppState
 import com.hfad.translator.model.data.DataModel
+import com.hfad.translator.utils.convertMeaningsToString
 import com.hfad.translator.utils.netwok.isOnline
 import com.hfad.translator.view.base.BaseActivity
+import com.hfad.translator.view.descriptionscreen.DescriptionActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,7 +31,14 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
+                startActivity(
+                    DescriptionActivity.getIntent(
+                        this@MainActivity,
+                        data.text!!,
+                        convertMeaningsToString(data.meanings!!),
+                        data.meanings[0].imageUrl
+                    )
+                )
             }
         }
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
