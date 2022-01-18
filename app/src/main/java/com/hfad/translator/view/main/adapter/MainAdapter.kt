@@ -35,6 +35,7 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
         return data.size
     }
 
+
     inner class RecyclerItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         private val viewBinding: ActivityMainRecyclerviewItemBinding by viewBinding()
@@ -48,7 +49,6 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
         }
 
     }
-
     private fun openInNewWindow(listItemData: DataModel) {
         onListItemClickListener.onItemClick(listItemData)
     }
@@ -57,3 +57,4 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
         fun onItemClick(data: DataModel)
     }
 }
+
