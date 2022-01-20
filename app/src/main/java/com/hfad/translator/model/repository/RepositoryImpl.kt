@@ -4,9 +4,6 @@ import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.model.datasource.DataSource
 
 
-/**
- * Репозиторий возвращает данные, используя dataSource (локальный или внешний)
- */
 class RepositoryImpl(private val dataSource: DataSource<List<DataModel>>) :
     Repository<List<DataModel>> {
 
@@ -14,4 +11,3 @@ class RepositoryImpl(private val dataSource: DataSource<List<DataModel>>) :
         return dataSource.getData(word)
     }
 }
-

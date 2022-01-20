@@ -1,24 +1,32 @@
 package com.hfad.translator.view.main
 
+import android.content.Intent
 import android.os.Bundle
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.Observer
+import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hfad.translator.R
+import com.hfad.translator.databinding.ActivityDescriptionBinding
 import com.hfad.translator.databinding.ActivityMainBinding
 import com.hfad.translator.model.data.AppState
 import com.hfad.translator.model.data.DataModel
+import com.hfad.translator.utils.convertMeaningsToString
 import com.hfad.translator.utils.netwok.isOnline
 import com.hfad.translator.view.base.BaseActivity
+import com.hfad.translator.view.descriptionscreen.DescriptionActivity
+import com.hfad.translator.view.history.HistoryActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class MainActivity : BaseActivity<AppState, MainInteractor>() {
+private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
 
-    private lateinit var binding: ActivityMainBinding
-    override val model: MainViewModel by viewModel()
+
+class MainActivity : BaseActivity<AppState, MainInteractor>() {
+    private  val viewBinding: ActivityMainBinding by viewBinding()
+
+    override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
     private val fabClickListener: View.OnClickListener =
         View.OnClickListener {
@@ -29,7 +37,14 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
     private val onListItemClickListener: MainAdapter.OnListItemClickListener =
         object : MainAdapter.OnListItemClickListener {
             override fun onItemClick(data: DataModel) {
-                Toast.makeText(this@MainActivity, data.text, Toast.LENGTH_SHORT).show()
+                startActivity(
+                    DescriptionActivity.getIntent(
+                        this@MainActivity,
+                        data.text!!,
+                        convertMeaningsToString(data.meanings!!),
+                        data.meanings[0].imageUrl
+                    )
+                )
             }
         }
     private val onSearchClickListener: SearchDialogFragment.OnSearchClickListener =
@@ -46,69 +61,41 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        initViewModel()
+        setContentView(R.layout.activity_main)
+        iniViewModel()
         initViews()
     }
 
-    override fun renderData(appState: AppState) {
-        when (appState) {
-            is AppState.Success -> {
-                showViewWorking()
-                val data = appState.data
-                if (data.isNullOrEmpty()) {
-                    showAlertDialog(
-                        getString(R.string.dialog_tittle_sorry),
-                        getString(R.string.empty_server_response_on_success)
-                    )
-                } else {
-                    adapter.setData(data)
-                }
+    override fun setDataToAdapter(data: List<DataModel>) {
+        adapter.setData(data)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.history_menu, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_history -> {
+                startActivity(Intent(this, HistoryActivity::class.java))
+                true
             }
-            is AppState.Loading -> {
-                showViewLoading()
-                with(binding) {
-                    if (appState.progress != null) {
-                        progressBarHorizontal.visibility = VISIBLE
-                        progressBarRound.visibility = GONE
-                        progressBarHorizontal.progress = appState.progress
-                    } else {
-                        progressBarHorizontal.visibility = GONE
-                        progressBarRound.visibility = VISIBLE
-                    }
-                }
-            }
-            is AppState.Error -> {
-                showViewWorking()
-                showAlertDialog(getString(R.string.error_stub), appState.error.message)
-            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
-    private fun initViewModel() {
-        if (binding.mainActivityRecyclerview.adapter != null) {
+    private fun iniViewModel() {
+        if (viewBinding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        model.subscribe().observe(this@MainActivity, { renderData(it) })
+        val viewModel: MainViewModel by viewModel()
+        model = viewModel
+        model.subscribe().observe(this@MainActivity,  { renderData(it) })
     }
 
-    private fun initViews() = with(binding) {
+    private fun initViews() = with(viewBinding) {
         searchFab.setOnClickListener(fabClickListener)
-        mainActivityRecyclerview.layoutManager = LinearLayoutManager(applicationContext)
         mainActivityRecyclerview.adapter = adapter
-    }
-
-    private fun showViewWorking() {
-        binding.loadingFrameLayout.visibility = GONE
-    }
-
-    private fun showViewLoading() {
-        binding.loadingFrameLayout.visibility = VISIBLE
-    }
-
-    companion object {
-        private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG =
-            "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
     }
 }
