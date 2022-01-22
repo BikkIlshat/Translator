@@ -6,12 +6,12 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.hfad.core.viewmodel.BaseActivity
 import com.hfad.model.AppState
 import com.hfad.model.DataModel
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainBinding
 import com.hfad.translator.utils.convertMeaningsToString
-import com.hfad.translator.view.base.BaseActivity
 import com.hfad.translator.view.descriptionscreen.DescriptionActivity
 import com.hfad.translator.view.history.HistoryActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
@@ -23,7 +23,7 @@ private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cb
 
 
 class MainActivity : BaseActivity<AppState, MainInteractor>() {
-    private  val viewBinding: ActivityMainBinding by viewBinding()
+    private val viewBinding: ActivityMainBinding by viewBinding()
 
     override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
@@ -90,7 +90,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         }
         val viewModel: MainViewModel by viewModel()
         model = viewModel
-        model.subscribe().observe(this@MainActivity,  { renderData(it) })
+        model.subscribe().observe(this@MainActivity, { renderData(it) })
     }
 
     private fun initViews() = with(viewBinding) {

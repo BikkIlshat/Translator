@@ -45,6 +45,7 @@ android {
         implementation(project(":utils"))
         implementation(project(":repository"))
         implementation(project(":model"))
+        implementation(project(":core"))
         //AndroidX
         implementation(Design.appcompat)
         //You should not use the com.android.support and com.google.android.material dependencies in your app at the same time

@@ -1,11 +1,11 @@
 package com.hfad.translator.view.main
 
 
+import com.hfad.core.viewmodel.Interactor
 import com.hfad.model.AppState
 import com.hfad.model.DataModel
 import com.hfad.repository.Repository
 import com.hfad.repository.RepositoryLocal
-import com.hfad.translator.viewmodel.Interactor
 
 /**
  * Снабжаем интерактор репозиторием для получения локальных или внешних данных

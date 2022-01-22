@@ -1,13 +1,13 @@
 package com.hfad.translator.view.history
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.hfad.core.viewmodel.BaseActivity
 import com.hfad.model.AppState
 import com.hfad.model.DataModel
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityHistoryBinding
-import com.hfad.translator.view.base.BaseActivity
+
 import org.koin.android.viewmodel.ext.android.viewModel
 
 

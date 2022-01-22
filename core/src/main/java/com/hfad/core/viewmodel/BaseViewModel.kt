@@ -1,4 +1,4 @@
-package com.hfad.translator.viewmodel
+package com.hfad.core.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
