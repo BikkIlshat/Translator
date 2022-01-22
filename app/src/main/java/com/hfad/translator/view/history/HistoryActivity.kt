@@ -8,7 +8,8 @@ import com.hfad.translator.databinding.ActivityHistoryBinding
 import com.hfad.translator.model.data.AppState
 import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.view.base.BaseActivity
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.android.viewmodel.ext.android.viewModel
+
 
 class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
 
