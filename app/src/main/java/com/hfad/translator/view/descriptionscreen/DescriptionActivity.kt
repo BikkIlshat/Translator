@@ -15,9 +15,10 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityDescriptionBinding
-import com.hfad.translator.utils.netwok.isOnline
-import com.hfad.translator.utils.ui.AlertDialogFragment
+
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.hfad.utils.netwok.isOnline
+import com.hfad.utils.netwok.ui.AlertDialogFragment
 
 class DescriptionActivity : AppCompatActivity() {
 

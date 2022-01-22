@@ -1,4 +1,4 @@
-package com.hfad.translator.utils.netwok
+package com.hfad.utils.netwok
 
 import android.content.Context
 import android.net.ConnectivityManager

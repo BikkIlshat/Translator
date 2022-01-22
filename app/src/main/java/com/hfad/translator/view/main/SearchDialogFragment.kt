@@ -10,7 +10,8 @@ import by.kirich1409.viewbindingdelegate.CreateMethod
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.hfad.translator.databinding.SearchDialogFragmentBinding
-import com.hfad.translator.utils.getEmptyString
+import com.hfad.utils.netwok.getEmptyString
+
 
 class SearchDialogFragment : BottomSheetDialogFragment() {
 

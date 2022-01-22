@@ -1,8 +1,8 @@
-package com.hfad.translator.utils.ui
+package com.hfad.utils.netwok.ui
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog
-import com.hfad.translator.R
+import com.hfad.utils.R
 
 fun getStubAlertDialog(context: Context): AlertDialog {
     return getAlertDialog(context, null, null)

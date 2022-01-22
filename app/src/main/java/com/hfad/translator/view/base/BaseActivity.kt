@@ -8,10 +8,10 @@ import com.hfad.translator.R
 import com.hfad.translator.databinding.LoadingLayoutBinding
 import com.hfad.translator.model.data.AppState
 import com.hfad.translator.model.data.DataModel
-import com.hfad.translator.utils.netwok.isOnline
-import com.hfad.translator.utils.ui.AlertDialogFragment
 import com.hfad.translator.viewmodel.BaseViewModel
 import com.hfad.translator.viewmodel.Interactor
+import com.hfad.utils.netwok.isOnline
+import com.hfad.utils.netwok.ui.AlertDialogFragment
 
 private const val DIALOG_FRAGMENT_TAG = "74a54328-5d62-46bf-ab6b-cbf5d8c79522"
 
