@@ -2,7 +2,7 @@ package com.hfad.translator.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hfad.translator.model.data.AppState
+import com.hfad.model.AppState
 import kotlinx.coroutines.*
 
 abstract class BaseViewModel<T : AppState>(

@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.hfad.model.DataModel
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainRecyclerviewItemBinding
-import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.utils.convertMeaningsToString
 
 class MainAdapter(private var onListItemClickListener: OnListItemClickListener) :

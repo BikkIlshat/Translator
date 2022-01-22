@@ -1,9 +1,10 @@
 package com.hfad.translator.view.history
 
-import com.hfad.translator.model.data.AppState
-import com.hfad.translator.model.data.DataModel
-import com.hfad.translator.model.repository.Repository
-import com.hfad.translator.model.repository.RepositoryLocal
+
+import com.hfad.model.AppState
+import com.hfad.model.DataModel
+import com.hfad.repository.Repository
+import com.hfad.repository.RepositoryLocal
 import com.hfad.translator.viewmodel.Interactor
 
 class HistoryInteractor(

@@ -1,14 +1,10 @@
 package com.hfad.translator.di
 
 import androidx.room.Room
-import com.hfad.translator.model.data.DataModel
-import com.hfad.translator.model.datasource.RetrofitImpl
-import com.hfad.translator.model.datasource.RoomDataBaseImpl
-import com.hfad.translator.model.repository.Repository
-import com.hfad.translator.model.repository.RepositoryImpl
-import com.hfad.translator.model.repository.RepositoryImplLocal
-import com.hfad.translator.model.repository.RepositoryLocal
-import com.hfad.translator.room.HistoryDataBase
+import com.hfad.model.DataModel
+import com.hfad.repository.*
+
+import com.hfad.repository.room.HistoryDataBase
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

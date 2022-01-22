@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.hfad.model.AppState
+import com.hfad.model.DataModel
 import com.hfad.translator.R
 import com.hfad.translator.databinding.LoadingLayoutBinding
-import com.hfad.translator.model.data.AppState
-import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.viewmodel.BaseViewModel
 import com.hfad.translator.viewmodel.Interactor
 import com.hfad.utils.netwok.isOnline
@@ -56,7 +56,7 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
                     if (appState.progress != null) {
                         progressBarHorizontal.visibility = View.VISIBLE
                         progressBarRound.visibility = View.GONE
-                        progressBarHorizontal.progress = appState.progress
+                        progressBarHorizontal.progress = appState.progress!!
                     } else {
                         progressBarHorizontal.visibility = View.GONE
                         progressBarRound.visibility = View.VISIBLE

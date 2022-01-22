@@ -5,15 +5,12 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import androidx.lifecycle.Observer
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.hfad.model.AppState
+import com.hfad.model.DataModel
 import com.hfad.translator.R
-import com.hfad.translator.databinding.ActivityDescriptionBinding
 import com.hfad.translator.databinding.ActivityMainBinding
-import com.hfad.translator.model.data.AppState
-import com.hfad.translator.model.data.DataModel
 import com.hfad.translator.utils.convertMeaningsToString
-
 import com.hfad.translator.view.base.BaseActivity
 import com.hfad.translator.view.descriptionscreen.DescriptionActivity
 import com.hfad.translator.view.history.HistoryActivity
@@ -44,7 +41,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                         this@MainActivity,
                         data.text!!,
                         convertMeaningsToString(data.meanings!!),
-                        data.meanings[0].imageUrl
+                        data.meanings!![0].imageUrl
                     )
                 )
             }

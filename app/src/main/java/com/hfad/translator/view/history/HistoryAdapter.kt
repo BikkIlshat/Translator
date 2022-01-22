@@ -6,8 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.hfad.model.DataModel
 import com.hfad.translator.R
-import com.hfad.translator.model.data.DataModel
+
 
 class HistoryAdapter :
     RecyclerView.Adapter<HistoryAdapter.RecyclerItemViewHolder>() {

@@ -1,7 +1,7 @@
 package com.hfad.translator.view.main
 
 import androidx.lifecycle.LiveData
-import com.hfad.translator.model.data.AppState
+import com.hfad.model.AppState
 import com.hfad.translator.utils.parseOnlineSearchResults
 import com.hfad.translator.viewmodel.BaseViewModel
 import kotlinx.coroutines.Dispatchers

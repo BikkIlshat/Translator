@@ -1,9 +1,9 @@
 package com.hfad.translator.utils
 
-import com.hfad.translator.model.data.AppState
-import com.hfad.translator.model.data.DataModel
-import com.hfad.translator.model.data.Meanings
-import com.hfad.translator.room.HistoryEntity
+import com.hfad.model.AppState
+import com.hfad.model.DataModel
+import com.hfad.model.Meanings
+import com.hfad.repository.room.HistoryEntity
 
 
 fun parseOnlineSearchResults(appState: AppState): AppState {
@@ -49,8 +49,8 @@ private fun getSuccessResultData(
 private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<DataModel>) {
     if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
         val newMeanings = arrayListOf<Meanings>()
-        for (meaning in dataModel.meanings) {
-            if (meaning.translation != null && !meaning.translation.translation.isNullOrBlank()) {
+        for (meaning in dataModel.meanings!!) {
+            if (meaning.translation != null && !meaning.translation!!.translation.isNullOrBlank()) {
                 newMeanings.add(Meanings(meaning.translation, meaning.imageUrl))
             }
         }
