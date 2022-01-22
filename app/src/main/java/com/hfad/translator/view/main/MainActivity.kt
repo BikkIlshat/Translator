@@ -13,7 +13,7 @@ import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainBinding
 import com.hfad.translator.utils.convertMeaningsToString
 import com.hfad.translator.view.descriptionscreen.DescriptionActivity
-import com.hfad.translator.view.history.HistoryActivity
+import com.hfad.historyscreen.history.HistoryActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
 import com.hfad.utils.netwok.isOnline
 import org.koin.android.viewmodel.ext.android.viewModel

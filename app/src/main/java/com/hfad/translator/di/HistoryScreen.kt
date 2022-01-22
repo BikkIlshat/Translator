@@ -1,7 +1,7 @@
 package com.hfad.translator.di
 
-import com.hfad.translator.view.history.HistoryInteractor
-import com.hfad.translator.view.history.HistoryViewModel
+import com.hfad.historyscreen.history.HistoryInteractor
+import com.hfad.historyscreen.history.HistoryViewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 

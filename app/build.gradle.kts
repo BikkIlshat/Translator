@@ -46,6 +46,7 @@ android {
         implementation(project(":repository"))
         implementation(project(":model"))
         implementation(project(":core"))
+        implementation(project(":historyScreen"))
         //AndroidX
         implementation(Design.appcompat)
         //You should not use the com.android.support and com.google.android.material dependencies in your app at the same time
