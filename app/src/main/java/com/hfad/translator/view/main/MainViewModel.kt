@@ -1,11 +1,12 @@
 package com.hfad.translator.view.main
 
 import androidx.lifecycle.LiveData
-import com.hfad.translator.model.data.AppState
+import com.hfad.core.viewmodel.BaseViewModel
+import com.hfad.model.AppState
 import com.hfad.translator.utils.parseOnlineSearchResults
-import com.hfad.translator.viewmodel.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 import kotlinx.coroutines.withContext
 
 class MainViewModel(private val interactor: MainInteractor) :
