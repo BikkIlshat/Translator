@@ -7,8 +7,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hfad.core.R
 import com.hfad.core.databinding.LoadingLayoutBinding
-import com.hfad.model.AppState
-import com.hfad.model.DataModel
+import com.hfad.model.data.AppState
+import com.hfad.model.data.userdata.DataModel
 import com.hfad.utils.netwok.OnlineLiveData
 import com.hfad.utils.netwok.isOnline
 import com.hfad.utils.ui.AlertDialogFragment

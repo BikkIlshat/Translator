@@ -5,8 +5,8 @@ import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hfad.core.viewmodel.BaseActivity
 import com.hfad.historyscreen.R
 import com.hfad.historyscreen.databinding.ActivityHistoryBinding
-import com.hfad.model.AppState
-import com.hfad.model.DataModel
+import com.hfad.model.data.AppState
+import com.hfad.model.data.userdata.DataModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 

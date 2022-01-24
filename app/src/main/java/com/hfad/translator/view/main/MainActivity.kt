@@ -7,15 +7,14 @@ import android.view.MenuItem
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.hfad.core.viewmodel.BaseActivity
-import com.hfad.model.AppState
-import com.hfad.model.DataModel
+import com.hfad.historyscreen.history.HistoryActivity
+import com.hfad.model.data.AppState
+import com.hfad.model.data.userdata.DataModel
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainBinding
-import com.hfad.translator.utils.convertMeaningsToString
+import com.hfad.translator.utils.convertMeaningsToSingleString
 import com.hfad.translator.view.descriptionscreen.DescriptionActivity
-import com.hfad.historyscreen.history.HistoryActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
-import com.hfad.utils.netwok.isOnline
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -39,9 +38,9 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
                 startActivity(
                     DescriptionActivity.getIntent(
                         this@MainActivity,
-                        data.text!!,
-                        convertMeaningsToString(data.meanings!!),
-                        data.meanings!![0].imageUrl
+                        data.text,
+                        convertMeaningsToSingleString(data.meanings),
+                        data.meanings[0].imageUrl
                     )
                 )
             }
