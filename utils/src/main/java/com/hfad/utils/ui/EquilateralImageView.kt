@@ -1,4 +1,4 @@
-package com.hfad.utils.netwok.ui
+package com.hfad.utils.ui
 
 import android.content.Context
 import android.util.AttributeSet

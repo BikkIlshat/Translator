@@ -39,9 +39,9 @@ object Versions {
     const val coroutinesAndroid = "1.4.3"
 
     //Retrofit
-    const val retrofit = "2.6.0"
-    const val converterGson = "2.6.0"
-    const val interceptor = "3.12.1"
+    const val retrofit = "2.9.0"
+    const val converterGson = "2.9.0"
+    const val interceptor = "5.0.0-alpha.3"
     const val adapterCoroutines = "0.9.2"
 
     //Koin
@@ -91,6 +91,7 @@ object Retrofit {
     const val converter_gson = "com.squareup.retrofit2:converter-gson:${Versions.converterGson}"
     const val adapter_coroutines = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.adapterCoroutines}"
     const val logging_interceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.interceptor}"
+
 }
 
 object Koin {

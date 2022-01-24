@@ -2,7 +2,7 @@ package com.hfad.translator.di
 
 import com.hfad.repository.RetrofitImpl
 import com.hfad.repository.api.ApiService
-import com.hfad.translator.model.data.api.BaseInterceptor
+import com.hfad.repository.api.BaseInterceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
