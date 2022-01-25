@@ -6,7 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.hfad.core.viewmodel.BaseActivity
+import com.hfad.core.BaseActivity
 import com.hfad.historyscreen.history.HistoryActivity
 import com.hfad.model.data.AppState
 import com.hfad.model.data.userdata.DataModel
@@ -15,15 +15,18 @@ import com.hfad.translator.databinding.ActivityMainBinding
 import com.hfad.translator.utils.convertMeaningsToSingleString
 import com.hfad.translator.view.descriptionscreen.DescriptionActivity
 import com.hfad.translator.view.main.adapter.MainAdapter
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.getOrCreateScope
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
 
 private const val BOTTOM_SHEET_FRAGMENT_DIALOG_TAG = "74a54328-5d62-46bf-ab6b-cbf5fgt0-092395"
 
 
-class MainActivity : BaseActivity<AppState, MainInteractor>() {
+class MainActivity : BaseActivity<AppState, MainInteractor>(), KoinScopeComponent {
+    override val scope: Scope by getOrCreateScope()
     private val viewBinding: ActivityMainBinding by viewBinding()
-
     override lateinit var model: MainViewModel
     private val adapter: MainAdapter by lazy { MainAdapter(onListItemClickListener) }
     private val fabClickListener: View.OnClickListener =
@@ -86,7 +89,7 @@ class MainActivity : BaseActivity<AppState, MainInteractor>() {
         if (viewBinding.mainActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        val viewModel: MainViewModel by viewModel()
+        val viewModel: MainViewModel by inject()
         model = viewModel
         model.subscribe().observe(this@MainActivity, { renderData(it) })
     }

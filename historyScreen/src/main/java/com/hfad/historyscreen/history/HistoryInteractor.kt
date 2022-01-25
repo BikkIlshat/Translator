@@ -5,7 +5,6 @@ import com.hfad.core.viewmodel.Interactor
 import com.hfad.model.data.AppState
 import com.hfad.model.data.dto.SearchResultDto
 import com.hfad.model.data.mapSearchResultToResult
-import com.hfad.model.data.userdata.DataModel
 import com.hfad.repository.Repository
 import com.hfad.repository.RepositoryLocal
 

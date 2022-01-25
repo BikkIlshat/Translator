@@ -45,8 +45,9 @@ object Versions {
     const val adapterCoroutines = "0.9.2"
 
     //Koin
-    const val koinAndroid = "2.1.6"
-    const val koinViewModel = "2.1.6"
+    const val koin = "3.1.2"
+    const val koinAndroid = "3.1.2"
+    const val koinAndroidCompat = "3.1.2"
 
     //Coil
     const val coil = "0.11.0"
@@ -95,10 +96,10 @@ object Retrofit {
 }
 
 object Koin {
-    const val koin_android = "org.koin:koin-android:${Versions.koinAndroid}"
-    const val koin_view_model = "org.koin:koin-android-viewmodel:${Versions.koinViewModel}"
+    const val koinCore = "io.insert-koin:koin-core:${Versions.koin}"
+    const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinAndroid}"
+    const val koinAndroidCompat = "io.insert-koin:koin-android-compat:${Versions.koinAndroidCompat}"
 }
-
 object Glide {
     const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
     const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideCompiler}"

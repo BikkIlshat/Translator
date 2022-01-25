@@ -72,8 +72,10 @@ android {
         //view binding delegate
         implementation(ViewBindingDelegate.viewBindingDelegate)
 
-        implementation(Koin.koin_android)
-        implementation(Koin.koin_view_model)
+        //Koin
+        implementation (Koin.koinCore)
+        implementation (Koin.koinAndroid)
+        implementation (Koin.koinAndroidCompat)
 
         // Coroutine
         implementation(Kotlin.core)

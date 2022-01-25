@@ -2,16 +2,19 @@ package com.hfad.historyscreen.history
 
 import android.os.Bundle
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.hfad.core.viewmodel.BaseActivity
+import com.hfad.core.BaseActivity
 import com.hfad.historyscreen.R
 import com.hfad.historyscreen.databinding.ActivityHistoryBinding
 import com.hfad.model.data.AppState
 import com.hfad.model.data.userdata.DataModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import org.koin.android.scope.getOrCreateScope
+import org.koin.core.component.KoinScopeComponent
+import org.koin.core.component.inject
+import org.koin.core.scope.Scope
 
 
-class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
-
+class HistoryActivity : BaseActivity<AppState, HistoryInteractor>(), KoinScopeComponent {
+    override val scope: Scope by getOrCreateScope()
     private val binding: ActivityHistoryBinding by viewBinding()
     override lateinit var model: HistoryViewModel
     private val adapter: HistoryAdapter by lazy { HistoryAdapter() }
@@ -37,7 +40,7 @@ class HistoryActivity : BaseActivity<AppState, HistoryInteractor>() {
         if (binding.historyActivityRecyclerview.adapter != null) {
             throw IllegalStateException("The ViewModel should be initialised first")
         }
-        val viewModel: HistoryViewModel by viewModel()
+        val viewModel: HistoryViewModel by inject()
         model = viewModel
         model.subscribe().observe(this@HistoryActivity, { renderData(it) })
     }
