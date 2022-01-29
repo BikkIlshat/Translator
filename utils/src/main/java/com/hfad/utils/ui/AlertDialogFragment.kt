@@ -1,8 +1,10 @@
-package com.hfad.utils.netwok.ui
+package com.hfad.utils.ui
 
 import android.app.Dialog
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatDialogFragment
+import com.hfad.utils.netwok.ui.getAlertDialog
+import com.hfad.utils.netwok.ui.getStubAlertDialog
 
 class AlertDialogFragment : AppCompatDialogFragment() {
 

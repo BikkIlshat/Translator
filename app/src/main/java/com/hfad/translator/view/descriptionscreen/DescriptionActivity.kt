@@ -17,8 +17,8 @@ import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityDescriptionBinding
 
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.hfad.utils.netwok.isOnline
-import com.hfad.utils.netwok.ui.AlertDialogFragment
+import com.hfad.utils.netwok.OnlineLiveData
+import com.hfad.utils.ui.AlertDialogFragment
 
 class DescriptionActivity : AppCompatActivity() {
 
@@ -64,19 +64,24 @@ class DescriptionActivity : AppCompatActivity() {
     }
 
     private fun startLoadingOrShowError() {
-        if (isOnline(applicationContext)) {
-            setData()
-        } else {
-            AlertDialogFragment.newInstance(
-                getString(R.string.dialog_title_device_is_offline),
-                getString(R.string.dialog_message_device_is_offline)
-            ).show(
-                supportFragmentManager,
-                DIALOG_FRAGMENT_TAG
-            )
-            stopRefreshAnimationIfNeeded()
-        }
+        OnlineLiveData(this).observe(
+            this@DescriptionActivity,
+            {
+                if (it) {
+                    setData()
+                } else {
+                    AlertDialogFragment.newInstance(
+                        getString(R.string.dialog_title_device_is_offline),
+                        getString(R.string.dialog_message_device_is_offline)
+                    ).show(
+                        supportFragmentManager,
+                        DIALOG_FRAGMENT_TAG
+                    )
+                    stopRefreshAnimationIfNeeded()
+                }
+            })
     }
+
 
     private fun stopRefreshAnimationIfNeeded() = with(viewBinding) {
         if (descriptionScreenSwipeRefreshLayout.isRefreshing) {

@@ -3,7 +3,7 @@ package com.hfad.historyscreen.history
 import androidx.lifecycle.LiveData
 import com.hfad.core.viewmodel.BaseViewModel
 import com.hfad.historyscreen.parseLocalSearchResults
-import com.hfad.model.AppState
+import com.hfad.model.data.AppState
 import kotlinx.coroutines.launch
 
 class HistoryViewModel(private val interactor: HistoryInteractor) :

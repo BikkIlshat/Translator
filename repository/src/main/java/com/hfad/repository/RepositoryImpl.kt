@@ -1,12 +1,12 @@
 package com.hfad.repository
 
-import com.hfad.model.DataModel
+import com.hfad.model.data.dto.SearchResultDto
 
 
-class RepositoryImpl(private val dataSource: DataSource<List<DataModel>>) :
-    Repository<List<DataModel>> {
+class RepositoryImpl(private val dataSource: DataSource<List<SearchResultDto>>) :
+    Repository<List<SearchResultDto>> {
 
-    override suspend fun getData(word: String): List<DataModel> {
+    override suspend fun getData(word: String): List<SearchResultDto> {
         return dataSource.getData(word)
     }
 }

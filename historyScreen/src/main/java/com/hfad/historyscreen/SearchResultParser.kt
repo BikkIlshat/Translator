@@ -1,57 +1,90 @@
 package com.hfad.historyscreen
 
-import com.hfad.model.AppState
-import com.hfad.model.DataModel
-import com.hfad.model.Meanings
-import com.hfad.repository.room.HistoryEntity
+import com.hfad.model.data.AppState
+import com.hfad.model.data.userdata.DataModel
+import com.hfad.model.data.dto.MeaningsDto
+import com.hfad.model.data.dto.SearchResultDto
+import com.hfad.model.data.userdata.Meaning
+import com.hfad.model.data.userdata.TranslatedMeaning
 
-fun parseLocalSearchResults(appState: AppState): AppState {
-    return AppState.Success(mapResult(appState, false))
+fun parseLocalSearchResults(data: AppState): AppState {
+    return AppState.Success(mapResult(data, false))
 }
 
 private fun mapResult(
-    appState: AppState,
+    data: AppState,
     isOnline: Boolean
 ): List<DataModel> {
     val newSearchResults = arrayListOf<DataModel>()
-    when (appState) {
+    when (data) {
         is AppState.Success -> {
-            getSuccessResultData(appState, isOnline, newSearchResults)
+            getSuccessResultData(data, isOnline, newSearchResults)
         }
     }
     return newSearchResults
 }
 
 private fun getSuccessResultData(
-    appState: AppState.Success,
+    data: AppState.Success,
     isOnline: Boolean,
-    newDataModels: ArrayList<DataModel>
+    newSearchDataModels: ArrayList<DataModel>
 ) {
-    val dataModels: List<DataModel> = appState.data as List<DataModel>
-    if (dataModels.isNotEmpty()) {
+    val searchDataModels: List<DataModel> = data.data as List<DataModel>
+    if (searchDataModels.isNotEmpty()) {
         if (isOnline) {
-            for (searchResult in dataModels) {
-                parseOnlineResult(searchResult, newDataModels)
+            for (searchResult in searchDataModels) {
+                parseOnlineResult(searchResult, newSearchDataModels)
             }
         } else {
-            for (searchResult in dataModels) {
-                newDataModels.add(DataModel(searchResult.text, arrayListOf()))
+            for (searchResult in searchDataModels) {
+                newSearchDataModels.add(
+                    DataModel(
+                        searchResult.text,
+                        arrayListOf()
+                    )
+                )
             }
         }
     }
 }
 
-private fun parseOnlineResult(dataModel: DataModel, newDataModels: ArrayList<DataModel>) {
-    if (!dataModel.text.isNullOrBlank() && !dataModel.meanings.isNullOrEmpty()) {
-        val newMeanings = arrayListOf<Meanings>()
-        for (meaning in dataModel.meanings!!) {
-            if (meaning.translation != null && !meaning.translation!!.translation.isNullOrBlank()) {
-                newMeanings.add(Meanings(meaning.translation, meaning.imageUrl))
+private fun parseOnlineResult(searchDataModel: DataModel, newSearchDataModels: ArrayList<DataModel>) {
+    if (searchDataModel.text.isNotBlank() && searchDataModel.meanings.isNotEmpty()) {
+        val newMeanings = arrayListOf<Meaning>()
+        for (meaning in searchDataModel.meanings) {
+            if (meaning.translatedMeaning.translatedMeaning.isBlank()) {
+                newMeanings.add(
+                    Meaning(
+                        meaning.translatedMeaning,
+                        meaning.imageUrl
+                    )
+                )
             }
         }
         if (newMeanings.isNotEmpty()) {
-            newDataModels.add(DataModel(dataModel.text, newMeanings))
+            newSearchDataModels.add(
+                DataModel(
+                    searchDataModel.text,
+                    newMeanings
+                )
+            )
         }
+    }
+}
+
+fun mapSearchResultToResult(searchResults: List<SearchResultDto>): List<DataModel> {
+    return searchResults.map { searchResult ->
+        var meanings: List<Meaning> = listOf()
+        searchResult.meanings?.let {
+            //Check for null for HistoryScreen
+            meanings = it.map { meaningsDto ->
+                Meaning(
+                    TranslatedMeaning(meaningsDto?.translation?.translation ?: ""),
+                    meaningsDto?.imageUrl.orEmpty()
+                )
+            }
+        }
+        DataModel(searchResult.text.orEmpty(), meanings)
     }
 }
 

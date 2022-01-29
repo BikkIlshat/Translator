@@ -1,12 +1,12 @@
-package com.hfad.model
+package com.hfad.model.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-class Meanings(
+class MeaningsDto(
 
     @field:
     SerializedName("translation")
-    val translation: Translation?,
+    val translation: TranslationDto?,
 
     @field:
     SerializedName("imageUrl")

@@ -1,15 +1,17 @@
-package com.hfad.core.viewmodel
+package com.hfad.core
 
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.hfad.core.R
 import com.hfad.core.databinding.LoadingLayoutBinding
-import com.hfad.model.AppState
-import com.hfad.model.DataModel
-import com.hfad.utils.netwok.isOnline
-import com.hfad.utils.netwok.ui.AlertDialogFragment
+import com.hfad.core.viewmodel.BaseViewModel
+import com.hfad.core.viewmodel.Interactor
+import com.hfad.model.data.AppState
+import com.hfad.model.data.userdata.DataModel
+import com.hfad.utils.netwok.OnlineLiveData
+import com.hfad.utils.ui.AlertDialogFragment
 
 
 private const val DIALOG_FRAGMENT_TAG = "74a54328-5d62-46bf-ab6b-cbf5d8c79522"
@@ -18,17 +20,32 @@ abstract class BaseActivity<T : AppState, I : Interactor<T>> : AppCompatActivity
 
     abstract val model: BaseViewModel<T>
     private lateinit var binding: LoadingLayoutBinding
-    protected var isNetworkAvailable: Boolean = false
+    protected var isNetworkAvailable: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        isNetworkAvailable = isOnline(applicationContext)
+        subscribeToNetworkChange()
     }
+
+    private fun subscribeToNetworkChange() {
+        OnlineLiveData(this).observe(
+            this@BaseActivity,
+            {
+                isNetworkAvailable = it
+                if (!isNetworkAvailable) {
+                    Toast.makeText(
+                        this@BaseActivity,
+                        R.string.dialog_message_device_is_offline,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+            })
+    }
+
 
     override fun onResume() {
         super.onResume()
         binding = LoadingLayoutBinding.inflate(layoutInflater)
-        isNetworkAvailable = isOnline(applicationContext)
         if (!isNetworkAvailable && isDialogNull()) {
             showNoInternetConnectionDialog()
         }

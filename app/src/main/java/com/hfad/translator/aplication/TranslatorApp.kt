@@ -11,7 +11,7 @@ class TranslatorApp : Application() {
         super.onCreate()
         startKoin {
             androidContext(applicationContext)
-            modules(listOf(application, mainScreenModule,repositoryModule,viewModelModule, historyScreen))
+            modules(listOf( mainScreenModule,repositoryModule,viewModelModule, historyScreen))
         }
     }
 }

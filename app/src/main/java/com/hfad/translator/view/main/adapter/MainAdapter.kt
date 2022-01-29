@@ -1,20 +1,22 @@
 package com.hfad.translator.view.main.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.hfad.model.DataModel
+import com.hfad.model.data.userdata.DataModel
 import com.hfad.translator.R
 import com.hfad.translator.databinding.ActivityMainRecyclerviewItemBinding
-import com.hfad.translator.utils.convertMeaningsToString
+import com.hfad.translator.utils.convertMeaningsToSingleString
 
 class MainAdapter(private var onListItemClickListener: OnListItemClickListener) :
     RecyclerView.Adapter<MainAdapter.RecyclerItemViewHolder>() {
 
     private var data: List<DataModel> = arrayListOf()
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(data: List<DataModel>) {
         this.data = data
         notifyDataSetChanged()
@@ -43,7 +45,7 @@ class MainAdapter(private var onListItemClickListener: OnListItemClickListener) 
         fun bind(data: DataModel) = with(viewBinding) {
             if (layoutPosition != RecyclerView.NO_POSITION) {
                 headerTextviewRecyclerItem.text = data.text
-                descriptionTextviewRecyclerItem.text = convertMeaningsToString(data.meanings!!)
+                convertMeaningsToSingleString(data.meanings)
                 itemView.setOnClickListener { openInNewWindow(data) }
             }
         }

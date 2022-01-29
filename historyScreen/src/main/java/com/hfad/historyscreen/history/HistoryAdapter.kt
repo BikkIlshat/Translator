@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.hfad.historyscreen.R
-import com.hfad.model.DataModel
+import com.hfad.model.data.userdata.DataModel
 
 
 class HistoryAdapter :

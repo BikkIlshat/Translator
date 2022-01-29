@@ -1,8 +1,8 @@
-package com.hfad.model
+package com.hfad.model.data.dto
 
 import com.google.gson.annotations.SerializedName
 
-class Translation(
+class TranslationDto(
 
     @field:
     SerializedName("text")
