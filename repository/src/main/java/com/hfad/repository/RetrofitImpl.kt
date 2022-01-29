@@ -1,7 +1,6 @@
 package com.hfad.repository
 
 import com.hfad.model.data.dto.SearchResultDto
-import com.hfad.model.data.userdata.DataModel
 import com.hfad.repository.api.ApiService
 import com.hfad.repository.api.BaseInterceptor
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory

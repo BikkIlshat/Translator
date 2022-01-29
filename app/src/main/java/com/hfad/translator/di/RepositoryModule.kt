@@ -9,7 +9,7 @@ import org.koin.dsl.module
 
 
 val repositoryModule = module {
-    single { Room.databaseBuilder(get(), HistoryDataBase::class.java, "HistoryDB").build() }
+    single { Room.databaseBuilder(get(), HistoryDataBase::class.java, NAME_HISTORY_DB).build() }
     single { get<HistoryDataBase>().historyDao() }
 
     single<Repository<List<SearchResultDto>>>(named(NAME_REMOTE)) {

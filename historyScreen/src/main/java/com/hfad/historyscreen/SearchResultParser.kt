@@ -80,11 +80,11 @@ fun mapSearchResultToResult(searchResults: List<SearchResultDto>): List<DataMode
             meanings = it.map { meaningsDto ->
                 Meaning(
                     TranslatedMeaning(meaningsDto?.translation?.translation ?: ""),
-                    meaningsDto?.imageUrl ?: ""
+                    meaningsDto?.imageUrl.orEmpty()
                 )
             }
         }
-        DataModel(searchResult.text ?: "", meanings)
+        DataModel(searchResult.text.orEmpty(), meanings)
     }
 }
 
