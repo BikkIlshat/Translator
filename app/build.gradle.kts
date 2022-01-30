@@ -9,6 +9,7 @@ android {
     compileSdk = 31
 
     defaultConfig {
+        vectorDrawables.useSupportLibrary = true
         applicationId = Config.applicationId
         minSdk = Config.minSdk
         targetSdk = Config.targetSdk
@@ -65,9 +66,9 @@ android {
         kapt(Room.compiler)
         implementation(Room.room_ktx)
 
-        //Glide
-        implementation(Glide.glide)
-        kapt(Glide.glideCompiler)
+        //Coil
+        implementation(Coil.coil)
+
 
         //view binding delegate
         implementation(ViewBindingDelegate.viewBindingDelegate)
