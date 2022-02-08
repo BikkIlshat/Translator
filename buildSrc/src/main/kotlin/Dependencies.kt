@@ -62,10 +62,6 @@ object Versions {
     const val runner = "1.2.0"
     const val espressoCore = "3.2.0"
 
-    //Glide
-    const val glide = "4.12.0"
-    const val glideCompiler = "4.11.0"
-
     //View binding delegate
     const val viewBindingDelegate = "1.4.7"
 }
@@ -100,9 +96,8 @@ object Koin {
     const val koinAndroid = "io.insert-koin:koin-android:${Versions.koinAndroid}"
     const val koinAndroidCompat = "io.insert-koin:koin-android-compat:${Versions.koinAndroidCompat}"
 }
-object Glide {
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glideCompiler}"
+object Coil {
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
 }
 
 
